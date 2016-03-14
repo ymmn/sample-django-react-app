@@ -5,24 +5,14 @@ var path = require('path');
 var fs = require('fs');
 
 
-module.exports = {
-  entry: {
-    main: path.resolve('./static/main-app.js'),
-  },
-
-  output: {
-    path: path.resolve('./static/build'),
-    filename: '[name].js',
-  },
-
+const commonConfig = {
   module: {
     loaders: [
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: path.resolve('./static'),
         query: {
-          presets: ['react', 'es2015'],
+          presets: ['react', 'es2015', 'stage-0'],
         },
       },
       {
@@ -46,7 +36,6 @@ module.exports = {
   ],
 
   resolve: {
-    root: path.resolve('./static'),
     modulesDirectories: ['node_modules'],
     extensions: ['', '.json', '.js', '.jsx']
   },
@@ -55,3 +44,29 @@ module.exports = {
     new ExtractTextPlugin("styles.css")
   ],
 }
+
+var clientConfig = Object.assign({
+  entry: {
+    main: path.resolve('./static/main-app.js'),
+  },
+
+  output: {
+    path: path.resolve('./static/build'),
+    filename: '[name].js',
+  },
+}, commonConfig)
+
+var serverConfig = Object.assign({
+  target: "node",
+
+  entry: {
+    server: path.resolve('./frontend-server/src/server.js'),
+  },
+
+  output: {
+    path: path.resolve('./frontend-server/build'),
+    filename: '[name].js',
+  },
+}, commonConfig)
+
+module.exports = [clientConfig, serverConfig]

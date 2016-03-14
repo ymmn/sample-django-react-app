@@ -4,6 +4,6 @@ import ReactDOM from 'react-dom'
 
 
 ReactDOM.render(
-  <RootComponent>Hello React World!</RootComponent>,
-  document.getElementById('container')
+  <RootComponent />,
+  document.getElementById('root')
 );
