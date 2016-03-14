@@ -2,7 +2,10 @@ import path from 'path'
 import express from 'express'
 import React, { Component, PropTypes } from 'react'
 import ReactDOMServer from 'react-dom/server'
-import RootComponent from '../../static/components/RootComponent/index.js'
+import MainApp from '../../static/src/main/MainApp'
+import mainAppReducers from '../../static/src/main/reducers'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 
 const server = express()
@@ -14,7 +17,14 @@ server.use(express.static(path.resolve('./static/build')));
 server.get('/', (req, res, next) => {
   console.time('request')
 
-  const body = ReactDOMServer.renderToString(<RootComponent />)
+  const initialState = {message: 'Hello from Redux!'}
+  const store = createStore(mainAppReducers, initialState)
+
+  const body = ReactDOMServer.renderToString(
+    <Provider store={store}>
+      <MainApp />
+    </Provider>
+  )
   const html = `<!doctype html>
     <html>
       <head>

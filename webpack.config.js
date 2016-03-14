@@ -47,7 +47,7 @@ const commonConfig = {
 
 var clientConfig = Object.assign({
   entry: {
-    main: path.resolve('./static/main-app.js'),
+    main: path.resolve('./static/src/main/index.js'),
   },
 
   output: {
