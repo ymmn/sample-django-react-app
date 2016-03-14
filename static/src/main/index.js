@@ -6,7 +6,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 
-const initialState = {message: 'Hello from Redux!'}
+const initialState = window.__INITIAL_STATE__
 const store = createStore(mainAppReducers, initialState)
 
 
