@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import styles from './styles.css'
+// import styles from './styles.css'
+const styles = {}
 
 
 class RootComponent extends Component {
